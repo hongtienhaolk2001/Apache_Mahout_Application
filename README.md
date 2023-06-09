@@ -37,11 +37,24 @@ export HADOOP_STREAMING=$HADOOP_HOME/share/hadoop/tools/lib/hadoop-streaming-3.2
 export HADOOP_LOG_DIR=$HADOOP_HOME/logs 
 export PDSH_RCMD_TYPE=ssh
 ```
-
 ### 1.3. Install Mahout
 - Download Mahout version 0.13.0 from [here](http://archive.apache.org/dist/mahout/)
 - Environment
 ```
 export MAHOUT_HOME=~/mahout/
 export PATH=$PATH:$MAHOUT_HOME/bin
+```
+## 2. Data
+First, I got dataset [Amazon Books Reviews](https://www.kaggle.com/datasets/mohamedbakhet/amazon-books-reviews) from  [kaggle](www.kaggle.com). And then, I preprocessed the data to get field (user_id, book_id and rating) need for recommendation algorithm (item-based), see [here](./data/recommendation/rating.csv).
+
+## 3. Run Mahout
+- training
+```python
+>> from mahout import Mahout
+>> book_recommendation = Mahout(data_name="rating.csv")
+>> book_recommendation.training()
+```
+- export result to csv file
+```python
+>> book_recommendation.export_csv()
 ```
